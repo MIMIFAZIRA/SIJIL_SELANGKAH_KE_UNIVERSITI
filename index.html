@@ -116,7 +116,7 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
 // Suit-up boot sequence
-const steps = ["INISIALISASI SISTEM...","MENGAKTIFKAN ARC REAKTOR...","MEMUATKAN PANGKALAN DATA SIJIL...","SUIT UP COMPLETE"];
+const steps = ["INISIALISASI SISTEM...","MENGAKTIFKAN HUB SMK SENIBONG...","MEMUATKAN PANGKALAN DATA SIJIL...","PREPARATION COMPLETE"];
 let si = 0;
 const bt = setInterval(()=>{ si++; if(si < steps.length) $("bootTxt").textContent = steps[si]; }, 800);
 function endBoot(){ clearInterval(bt); $("boot").classList.add("off"); }
