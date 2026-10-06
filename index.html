@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hub Sijil | Selangkah Ke Universiti</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--p:#ff4fa3;--p2:#ff9ccc;--p3:#ffd6ea;--bg:#0a0509;--panel:rgba(255,79,163,.07);--line:rgba(255,79,163,.45)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Rajdhani',system-ui,sans-serif;color:var(--p3);background:var(--bg);min-height:100vh;overflow-x:hidden;font-size:17px}
+body:before{content:"";position:fixed;inset:0;z-index:-2;
+background:radial-gradient(circle at 50% 0,rgba(255,79,163,.22),transparent 55%),
+linear-gradient(rgba(255,79,163,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,79,163,.07) 1px,transparent 1px);
+background-size:100% 100%,44px 44px,44px 44px}
+body:after{content:"";position:fixed;left:0;right:0;height:3px;top:0;z-index:5;pointer-events:none;
+background:linear-gradient(90deg,transparent,var(--p),transparent);box-shadow:0 0 18px var(--p);animation:scan 5s linear infinite;opacity:.5}
+@keyframes scan{to{top:100%}}
+h1,h2,h3,.orb{font-family:'Orbitron',sans-serif}
+
+/* BOOT / SUIT UP */
+#boot{position:fixed;inset:0;z-index:20;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;cursor:pointer;transition:opacity .8s,transform .8s}
+#boot.off{opacity:0;transform:scale(1.15);pointer-events:none}
+.reactor{width:150px;height:150px;border-radius:50%;position:relative;display:grid;place-items:center;
+background:radial-gradient(circle,#fff 0,var(--p3) 12%,var(--p) 40%,transparent 70%);box-shadow:0 0 60px var(--p),0 0 140px rgba(255,79,163,.6);animation:pulse 1.6s ease-in-out infinite}
+.reactor:before,.reactor:after{content:"";position:absolute;border-radius:50%;border:2px dashed var(--p2)}
+.reactor:before{inset:-14px;animation:spin 6s linear infinite}
+.reactor:after{inset:-30px;border:2px solid var(--line);border-top-color:var(--p);animation:spin 3s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{50%{filter:brightness(1.35);transform:scale(1.05)}}
+#bootTxt{font-family:'Orbitron';font-size:.8rem;letter-spacing:3px;color:var(--p2);min-height:1.4em;text-align:center;padding:0 16px}
+.bar{width:min(320px,80vw);height:6px;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--p),var(--p3));box-shadow:0 0 12px var(--p);animation:load 3.2s ease-out forwards}
+@keyframes load{to{width:100%}}
+.skip{font-size:.7rem;letter-spacing:2px;opacity:.5}
+
+/* HEADER */
+header{text-align:center;padding:36px 16px 10px}
+.logoWrap{width:132px;height:132px;margin:0 auto;position:relative;display:grid;place-items:center}
+.logoWrap:before,.logoWrap:after{content:"";position:absolute;border-radius:50%}
+.logoWrap:before{inset:0;border:2px solid var(--p);box-shadow:0 0 22px var(--p),inset 0 0 22px rgba(255,79,163,.5);animation:pulse 2.4s infinite}
+.logoWrap:after{inset:-12px;border:2px dashed var(--line);animation:spin 14s linear infinite}
+.logoWrap img{width:104px;height:104px;border-radius:50%;object-fit:contain;background:#fff;padding:5px;position:relative}
+header h1{font-weight:900;font-size:clamp(1.4rem,5.5vw,2.5rem);letter-spacing:4px;margin-top:22px;color:#fff;text-shadow:0 0 14px var(--p),0 0 34px var(--p)}
+header p{color:var(--p2);letter-spacing:5px;font-size:.85rem;text-transform:uppercase;margin-top:6px}
+.tag{display:inline-block;margin-top:12px;font-family:'Orbitron';font-size:.62rem;letter-spacing:3px;color:var(--p);border:1px solid var(--line);padding:4px 12px;border-radius:2px}
+.tag:before{content:"● ";animation:blink 1.2s infinite}@keyframes blink{50%{opacity:.2}}
+
+/* HUD PANEL */
+main{max-width:740px;margin:26px auto 40px;padding:0 16px}
+.hud{position:relative;background:var(--panel);border:1px solid var(--line);padding:26px;backdrop-filter:blur(6px);
+clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,22px 100%,0 calc(100% - 22px));box-shadow:0 0 40px rgba(255,79,163,.12) inset}
+.hud:before{content:"";position:absolute;inset:0;border:1px solid var(--p);opacity:.25;pointer-events:none}
+label{font-family:'Orbitron';font-size:.72rem;letter-spacing:3px;color:var(--p2)}
+.row{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
+input{flex:1;min-width:210px;padding:14px 16px;background:rgba(0,0,0,.55);border:1px solid var(--p);color:#fff;font:600 1.25rem 'Orbitron';letter-spacing:3px;outline:none;border-radius:2px}
+input::placeholder{color:rgba(255,156,204,.35);font-size:.95rem;letter-spacing:2px}
+input:focus{box-shadow:0 0 18px rgba(255,79,163,.7)}
+button,.btn{background:linear-gradient(135deg,var(--p),#c2186f);color:#fff;border:0;padding:14px 30px;font:700 .85rem 'Orbitron';letter-spacing:3px;cursor:pointer;text-decoration:none;display:inline-block;text-align:center;
+clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);transition:.2s;box-shadow:0 0 20px rgba(255,79,163,.5)}
+button:hover,.btn:hover{filter:brightness(1.25);transform:translateY(-1px)}
+button:disabled{opacity:.6;cursor:wait}
+.btn.alt{background:transparent;color:var(--p2);box-shadow:none;outline:1px solid var(--p);outline-offset:-1px}
+.hint{font-size:.85rem;color:rgba(255,156,204,.65);margin-top:10px}
+.msg{margin-top:20px;padding:14px 16px;border-left:3px solid var(--p);background:rgba(255,79,163,.1);font-weight:500}
+.res{margin-top:20px;padding:20px;border:1px solid var(--line);background:rgba(0,0,0,.4);position:relative;animation:in .6s both}
+.res:before{content:"";position:absolute;top:-1px;left:-1px;width:26px;height:26px;border-top:3px solid var(--p);border-left:3px solid var(--p)}
+.res:after{content:"";position:absolute;bottom:-1px;right:-1px;width:26px;height:26px;border-bottom:3px solid var(--p);border-right:3px solid var(--p)}
+@keyframes in{from{opacity:0;transform:translateY(14px) scale(.97)}}
+.res small{font-family:'Orbitron';font-size:.6rem;letter-spacing:3px;color:var(--p)}
+.res h3{font-size:1.15rem;color:#fff;margin:4px 0 6px;letter-spacing:1px;text-shadow:0 0 10px var(--p)}
+.res .meta{color:var(--p2);font-weight:500}
+.res .file{margin-top:10px;color:var(--p3);font-weight:500;word-break:break-word}
+.acts{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.acts .btn{padding:11px 22px;font-size:.72rem}
+footer{text-align:center;color:rgba(255,156,204,.5);font-size:.8rem;letter-spacing:2px;padding:0 16px 28px}
+</style>
+</head>
+<body>
+
+<div id="boot" title="Klik untuk langkau">
+  <div class="reactor"></div>
+  <div id="bootTxt">INISIALISASI SISTEM...</div>
+  <div class="bar"><i></i></div>
+  <div class="skip">KLIK UNTUK LANGKAU</div>
+</div>
+
+<header>
+  <div class="logoWrap">
+    <img src="https://app.pandai.org/uploads/school/YEA1402.png" alt="Logo SMK Senibong" onerror="this.onerror=null;this.src='logo.jpg'">
+  </div>
+  <h1>HUB SIJIL</h1>
+  <p>Program Selangkah Ke Universiti</p>
+  <span class="tag">SMK SENIBONG &middot; SISTEM DALAM TALIAN</span>
+</header>
+
+<main>
+  <div class="hud">
+    <label for="ic">// NOMBOR KAD PENGENALAN</label>
+    <div class="row">
+      <input id="ic" inputmode="numeric" maxlength="14" placeholder="12 DIGIT TANPA '-'" autocomplete="off">
+      <button id="btn">CARI</button>
+    </div>
+    <div class="hint">Masukkan nombor kad pengenalan anda untuk mengimbas sijil.</div>
+    <div id="out"></div>
+  </div>
+</main>
+
+<footer>&copy; SMK SENIBONG &middot; SELANGKAH KE UNIVERSITI</footer>
+
+<script>
+// GANTI dengan URL Web App Apps Script anda (berakhir dengan /exec)
+const API_URL = "https://script.google.com/macros/s/AKfycbySUBvh2vOHI3g-tHF6tG1VOFKHXkbe3yvyQt4LovqaQrtVyoerqhrHkEQbHKumY2rIsQ/exec";
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+// Suit-up boot sequence
+const steps = ["INISIALISASI SISTEM...","MENGAKTIFKAN ARC REAKTOR...","MEMUATKAN PANGKALAN DATA SIJIL...","SUIT UP COMPLETE"];
+let si = 0;
+const bt = setInterval(()=>{ si++; if(si < steps.length) $("bootTxt").textContent = steps[si]; }, 800);
+function endBoot(){ clearInterval(bt); $("boot").classList.add("off"); }
+setTimeout(endBoot, 3400);
+$("boot").addEventListener("click", endBoot);
+
+function driveId(url){
+  const m = String(url||"").match(/\/d\/([-\w]{20,})/) || String(url||"").match(/[?&]id=([-\w]{20,})/);
+  return m ? m[1] : null;
+}
+
+async function cari(){
+  const ic = $("ic").value.replace(/\D/g,"");
+  const out = $("out");
+  if(ic.length !== 12){ out.innerHTML = '<div class="msg">⚠ Sila masukkan nombor kad pengenalan 12 digit.</div>'; return; }
+  $("btn").disabled = true; $("btn").textContent = "MENGIMBAS...";
+  out.innerHTML = "";
+  try{
+    const r = await fetch(API_URL + "?ic=" + ic);
+    const d = await r.json();
+    if(!d.ok) throw new Error(d.error || "Ralat");
+    if(!d.results.length){ out.innerHTML = '<div class="msg">✖ Tiada sijil dijumpai untuk nombor kad pengenalan ini. Sila semak semula atau hubungi pihak sekolah.</div>'; return; }
+    out.innerHTML = d.results.map(x=>{
+      const id = driveId(x.link);
+      const view = id ? `https://drive.google.com/file/d/${id}/view` : x.link;
+      const dl = id ? `https://drive.google.com/uc?export=download&id=${id}` : x.link;
+      return `<div class="res">
+        <small>PESERTA DISAHKAN</small>
+        <h3>${esc(x.nama)}</h3>
+        <div class="meta">${esc(x.sekolah)}</div>
+        <div class="file">📄 ${esc(x.fail)}</div>
+        <div class="acts">
+          <a class="btn" href="${esc(dl)}" target="_blank" rel="noopener">MUAT TURUN</a>
+          <a class="btn alt" href="${esc(view)}" target="_blank" rel="noopener">PRATONTON</a>
+        </div></div>`;
+    }).join("");
+  }catch(e){
+    out.innerHTML = '<div class="msg">✖ Maaf, berlaku masalah sambungan. Sila cuba lagi sebentar.</div>';
+  }finally{
+    $("btn").disabled = false; $("btn").textContent = "CARI";
+  }
+}
+$("btn").addEventListener("click", cari);
+$("ic").addEventListener("keydown", e => { if(e.key === "Enter") cari(); });
+</script>
+</body>
+</html>
